@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+</head>
+<body>
+    <main>
+        
+        <h1>Lista de ToDo's</h1>
+
+        <ul id="lista-tareas">
+            <!--Lista de Tareas-->
+        </ul>
+
+        <div>
+            <input id="input-tarea" placeholder="Escribe la tarea" type="text">
+            <button id="boton-añadir-tarea">Crea un elemento de la lista</button>
+        </div>    
+    
+    </main>
+</body>
+<script>
+    // Ejercicio para generar una lista de tareas desde un input y un botón
+    // con la funcionalidad de poder eliminar después cada uno de los elementos creados
+    
+    // Defino la función 'añadirTarea()'
+    function añadirTarea() {
+        const inputTarea = document.getElementById('input-tarea')    // porque llamaré al elemento inputTarea N veces
+        const textoTarea = inputTarea.value                          // texo de la etiqueta <span> creada en cada <li> 
+        const listaTareas = document.getElementById('lista-tareas')  // identifico al elemento <ul>
+    
+        const nuevoElementoLista = document.createElement('LI')      // Creo un nuevo elemento <li>
+            nuevoElementoLista.innerHTML=`
+        <span>${textoTarea}</span>
+        <button onclick="borrarTarea(this)">Eliminar</button>
+        `
+        // en html estamos creando
+        // <li>
+        // <span>textoTarea</span>
+        // <button onclick="borrarTarea(this)">Eliminar</button> Llamo al método onclick (en línea)
+        // </li>
+        
+
+        listaTareas.appendChild(nuevoElementoLista)                  // Lo añado a listaTareas (<ul> padre)  
+        inputTarea.value=''                                          // borro el contenido del elemento <input>
+    }
+    
+    // Hago que el <button> 'boton-añadir-tarea' escuche un evento 'click' para ejecutar la función 'añadirTarea()'
+    document.getElementById('boton-añadir-tarea').addEventListener('click', añadirTarea)
+    
+    // Defino la función borrarTarea que se lanzará al hacer click en el 'boton-eliminar' de cada tarea creada
+    function borrarTarea() {
+        const listaTareas = document.getElementById('lista-tareas')
+        const elementoLista = event.target.parentElement
+        listaTareas.removeChild(elementoLista)
+    }    
+
+</script>
+</html>
